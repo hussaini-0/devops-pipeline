@@ -1,0 +1,10 @@
+subscription_id     = ""
+client_id           = ""
+client_secret       = ""
+tenant_id           = ""
+
+resource_group_name = "devops-pipeline-rg"
+location            = "East US"
+vm_name             = "devops-vm"
+admin_username      = "azureuser"
+admin_ssh_public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC8UOVFIVB+cr7zamKzHWNJn+lzZXOXGPvF5h1fz3KLdQYr180vqQnNPzedq0gNP3/6tnviDFAhhYt6TgtCZvye4Q8hIV+gac7uoq+tOXZQlVNa90BL2hlI8rdsp025baIHlGjCnkUaFTQ7fu4+AFtergF4UkeYXsTeInlUVLptD1rvzRWIWrX0eiC4d6TKFdqIuE3ynhnb2b6k4T4ayKKTemqwzrZwEET/JM9dfdVkZVbJqm9TavdyWoKhM/WU3K6EdY+qRfU/LUJGjAs7cZ6D5HPL0nrf+SJ+tJEbJaiUO9x91kCr6seyqCjymZ6LhWMPzKbvCIP5k2PEz5XFeNCmIcz+ZJz848ANt8XOBd58Wv/C4umzpW8B7KIW9PGecwlDhULY8M3Dz/2K4acj8R2fX7+wzwYgLcY6zALqUPUJc4LEWyoLDLPyy+mJe9gFZSjmH6k9UYdmZrbDMUeEKMeumeTC2Rpnwt0tte4Nog1x2eUqhvyRowPZUA9hAspvpF8vo+4YCe2ApdSAfaep6Q67tIy1wuiv59ZNycawM0jS7Z9wJO8XGjq/E0tA9q4cZ+01D/9xQvZ9CFCnFUIAScnfojflTjn8Jes5bR6AXpJidQB2CdUwXYIYqLEIvG+CkMFHefD8O1DB2MSoYxO0rVARKVGycsa/x6Zm7eL8FURqUw== azureuser"
