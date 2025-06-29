@@ -50,7 +50,7 @@ pipeline {
             dir('terraform') {
               sh '''
                 terraform import azurerm_linux_virtual_machine.main "/subscriptions/${TF_VAR_subscription_id}/resourceGroups/${TF_VAR_resource_group_name}/providers/Microsoft.Compute/virtualMachines/${TF_VAR_vm_name}" || true
-                terraform import azurerm_network_interface_security_group_association.main "/subscriptions/${TF_VAR_subscription_id}/resourceGroups/${TF_VAR_resource_group_name}/providers/Microsoft.Network/networkInterfaces/nic-devops/networkSecurityGroups/nsg-devops" || true
+                terraform import azurerm_network_interface_security_group_association.main "/subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/devops-pipeline-rg/providers/Microsoft.Network/networkInterfaces/nic-devops" "/subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/devops-pipeline-rg/providers/Microsoft.Network/networkSecurityGroups/nsg-devops"
               '''
             }
           }
