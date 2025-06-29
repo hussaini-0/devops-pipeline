@@ -101,7 +101,7 @@ pipeline {
             echo "[web]" > inventory.ini
             echo "${VM_PUBLIC_IP} ansible_user=azureuser ansible_ssh_private_key_file=${SSH_KEY}" >> inventory.ini
 
-            ansible-playbook ansible/install_web.yml -i inventory.ini
+            ansible-playbook ansible/playbook.yml -i inventory.ini
             rm -f inventory.ini
           '''
         }
