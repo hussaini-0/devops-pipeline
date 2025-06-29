@@ -49,8 +49,7 @@ pipeline {
           ]) {
             dir('terraform') {
               sh '''
-                terraform import azurerm_linux_virtual_machine.main "/subscriptions/${TF_VAR_subscription_id}/resourceGroups/${TF_VAR_resource_group_name}/providers/Microsoft.Compute/virtualMachines/${TF_VAR_vm_name}" || true
-                terraform import azurerm_network_interface_security_group_association.main "/subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/devops-pipeline-rg/providers/Microsoft.Network/networkInterfaces/nic-devops" "/subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/devops-pipeline-rg/providers/Microsoft.Network/networkSecurityGroups/nsg-devops"
+                terraform import azurerm_network_interface_security_group_association.main "/subscriptions/${TF_VAR_subscription_id}/resourceGroups/${TF_VAR_resource_group_name}/providers/Microsoft.Network/networkInterfaces/nic-devops|/subscriptions/${TF_VAR_subscription_id}/resourceGroups/${TF_VAR_resource_group_name}/providers/Microsoft.Network/networkSecurityGroups/nsg-devops" || true
               '''
             }
           }
@@ -94,11 +93,13 @@ pipeline {
 
     stage('Run Ansible Playbook') {
       steps {
-        withCredentials([sshUserPrivateKey(credentialsId: 'ansible_ssh_key', keyFileVariable: 'SSH_KEY')]) {
+        withCredentials([
+          sshUserPrivateKey(credentialsId: 'ansible_ssh_key', keyFileVariable: 'SSH_KEY')
+        ]) {
           sh '''
             export ANSIBLE_HOST_KEY_CHECKING=False
             echo "[web]" > inventory.ini
-            echo "$VM_PUBLIC_IP ansible_user=azureuser ansible_ssh_private_key_file=$SSH_KEY" >> inventory.ini
+            echo "${VM_PUBLIC_IP} ansible_user=azureuser ansible_ssh_private_key_file=${SSH_KEY}" >> inventory.ini
 
             ansible-playbook ansible/install_web.yml -i inventory.ini
             rm -f inventory.ini
@@ -109,7 +110,7 @@ pipeline {
 
     stage('Verify Deployment') {
       steps {
-        sh 'curl -s http://$VM_PUBLIC_IP | grep -i "devops project completed"'
+        sh 'curl -s http://${VM_PUBLIC_IP} | grep -i "devops project completed"'
       }
     }
   }
